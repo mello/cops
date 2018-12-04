@@ -1,0 +1,41 @@
+------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/mellosteve2/Dropbox/Projects/Cops/Replication/tab/tab8.txt
+  log type:  text
+ opened on:  21 Jul 2018, 14:01:27
+
+. #delimit ;
+delimiter now ;
+. esttab, star(* .1 ** .05 *** .01) 
+> keep(swornrt) wrap varwidth(20) se 
+> stats(pval mu elast fbeta ff ctl syfe trd ncluster N,
+> label("P-Val of Difference" "Mean" "Elasticity" "First Stage Beta" "F-Stat" "Controls" "Size x Year Effects" "City Trends" 
+> "Clusters (Cities)" "Observations (City-Years)")) 
+> label fragment
+> mtitles("Predicted Firers" "Predicted Hirers") ;
+
+                              (1)             (2)   
+                     Predicted ~s    Predicted ~s   
+----------------------------------------------------
+Police per 10,000          -45.42**        -27.38   
+                          (22.72)         (19.76)   
+----------------------------------------------------
+P-Val of Difference             -             .55   
+Mean                       653.21          718.73   
+Elasticity                   -1.5            -.92   
+First Stage Beta              .61             .84   
+F-Stat                      14.56            9.02   
+Controls                      Yes             Yes   
+Size x Year Effects           Yes             Yes   
+City Trends                   Yes             Yes   
+Clusters (Cities)            2164            2163   
+Observations (City~)        23804           23793   
+
+. #delimit cr
+delimiter now cr
+. log close
+      name:  <unnamed>
+       log:  /Users/mellosteve2/Dropbox/Projects/Cops/Replication/tab/tab8.txt
+  log type:  text
+ closed on:  21 Jul 2018, 14:01:27
+------------------------------------------------------------------------------------------------------------------------------------------------

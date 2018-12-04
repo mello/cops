@@ -1,0 +1,46 @@
+-------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/mellosteve2/Dropbox/Projects/Cops/Replication/tab/tab2.txt
+  log type:  text
+ opened on:  21 Jul 2018, 13:24:34
+
+. #delimit ;
+delimiter now ;
+. esttab, star(* .1 ** .05 *** .01) 
+> keep(high_post swornrt) wrap varwidth(20) se 
+> stats(mu elast fstat ctl syfe trd ncluster N,
+> label("Mean" "Elasticity" "F-Stat" "Controls" "Size x Year Effects" "City Trends" 
+> "Clusters (Cities)" "Observations (City-Years)")) 
+> label 
+> mtitles("Police" "Crime" "OLS: Crime" "IV: Crime") ;
+
+------------------------------------------------------------------------------------
+                              (1)             (2)             (3)             (4)   
+                           Police           Crime      OLS: Crime       IV: Crime   
+------------------------------------------------------------------------------------
+High x Post                 0.723***       -25.43***                                
+                          (0.158)         (9.083)                                   
+
+Police per 10,000                                           2.198***       -35.17** 
+                                                          (0.710)         (15.19)   
+------------------------------------------------------------------------------------
+Mean                        22.85          689.23          689.23          689.23   
+Elasticity                      -               -             .07           -1.17   
+F-Stat                      20.96               -               -               -   
+Controls                      Yes             Yes             Yes             Yes   
+Size x Year Effects           Yes             Yes             Yes             Yes   
+City Trends                   Yes             Yes             Yes             Yes   
+Clusters (Cities)            4327            4327            4327            4327   
+Observations (City~)        47597           47597           47597           47597   
+------------------------------------------------------------------------------------
+Standard errors in parentheses
+* p<.1, ** p<.05, *** p<.01
+
+. #delimit cr
+delimiter now cr
+. log close
+      name:  <unnamed>
+       log:  /Users/mellosteve2/Dropbox/Projects/Cops/Replication/tab/tab2.txt
+  log type:  text
+ closed on:  21 Jul 2018, 13:24:34
+-------------------------------------------------------------------------------------------

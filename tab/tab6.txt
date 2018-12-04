@@ -1,0 +1,38 @@
+----------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/mellosteve2/Dropbox/Projects/Cops/Replication/tab/tab6.txt
+  log type:  text
+ opened on:  21 Jul 2018, 14:38:37
+
+. #delimit ;
+delimiter now ;
+. esttab, star(* .1 ** .05 *** .01) 
+> keep(swornrt) wrap varwidth(20) se 
+> stats(mu elast ctl syfe trd ncluster N,
+> label("Mean" "Elasticity" "Controls" "Size x Year Effects" "City Trends" 
+> "Clusters (Cities)" "Observations (City-Years)")) 
+> label fragment 
+> mtitles("Violent Crimes" "Violent Arrests" "Property Crimes" "Property Arrests") ;
+
+                              (1)             (2)             (3)             (4)   
+                     Violent Cr~s    Violent Ar~s    Property C~s    Property A~s   
+------------------------------------------------------------------------------------
+Police per 10,000          -4.377**         0.173          -18.28**        -0.498   
+                          (2.093)         (0.690)         (7.256)         (2.002)   
+------------------------------------------------------------------------------------
+Mean                        75.52           23.02          439.74           76.77   
+Elasticity                  -1.31             .17           -.940            -.15   
+Controls                      Yes             Yes             Yes             Yes   
+Size x Year Effects           Yes             Yes             Yes             Yes   
+City Trends                   Yes             Yes             Yes             Yes   
+Clusters (Cities)            3914            3914            3914            3914   
+Observations (City~)        43054           43054           43054           43054   
+
+. #delimit cr
+delimiter now cr
+. log close
+      name:  <unnamed>
+       log:  /Users/mellosteve2/Dropbox/Projects/Cops/Replication/tab/tab6.txt
+  log type:  text
+ closed on:  21 Jul 2018, 14:38:37
+----------------------------------------------------------------------------------------
